@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+.bun/
+
+# Build outputs
+.astro/
+.svelte-kit/
+dist/
+build/
+
+# Environment Variables & Secrets (Maximum Security Guardrail)
+.env
+.env.*
+!.env.example
+
+# Temporary & Cache
+.DS_Store
+*.log
+.biome/
