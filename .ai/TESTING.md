@@ -10,8 +10,8 @@ Before an agent marks any task as `"completed"` in [`.ai/TASK.json`](file:///Use
 
 ### For Website Modality (Astro v7)
 ```bash
-# 1. Format and Linting Check
-bunx biome check --write
+# 1. Scoped Format and Linting Check (Run on target files to avoid out-of-boundary modifications)
+bunx biome check --write <target_files>
 
 # 2. Astro Type & Component Checking
 bunx astro check
@@ -22,8 +22,8 @@ bun test
 
 ### For Application Modality (SvelteKit)
 ```bash
-# 1. Format and Linting Check
-bunx biome check --write
+# 1. Scoped Format and Linting Check (Run on target files to avoid out-of-boundary modifications)
+bunx biome check --write <target_files>
 
 # 2. Svelte & TypeScript Checking
 bun x svelte-check --tsconfig ./tsconfig.json
@@ -32,7 +32,7 @@ bun x svelte-check --tsconfig ./tsconfig.json
 bun test
 ```
 
-> **Enforcement Rule:** If any check fails, do NOT mark the task completed. Apply automated fixes (up to 2 attempts) or follow the Escalation Protocol in [`.ai/IA.md`](file:///Users/alanvidal/Desktop/IA/.ai/IA.md).
+> **Enforcement Rule:** If any check fails, do NOT mark the task completed. Apply automated fixes (up to 2 attempts) or follow the Safe Rollback & Escalation Protocol in [`.ai/IA.md`](file:///Users/alanvidal/Desktop/IA/.ai/IA.md).
 
 ---
 

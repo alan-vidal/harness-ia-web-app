@@ -68,10 +68,16 @@ Agents must work cleanly without leaving untracked pollution or making unauthori
   git checkout -b task/<task_id>-<short-description>
   ```
   *(Example: `git checkout -b task/T-001-navigation-bar`)*
-* **Task Merge Protocol:** Once verification gates pass, commit changes and merge back into `develop`:
+* **Task Staging & Commit Protocol:** When verification passes, stage the target files and the harness state atomically before committing:
+  ```bash
+  git add <target_files> .ai/TASK.json .ai/STATE.md
+  git commit -m "<type>(<scope>): <description>"
+  ```
+* **Task Merge & Branch Housekeeping:** Merge back into `develop` and delete the local task branch to keep the workspace clean:
   ```bash
   git checkout develop
   git merge --ff-only task/<task_id>-<short-description>
+  git branch -d task/<task_id>-<short-description>
   ```
 * **Strict Scope Boundary:** Edits are restricted strictly to files listed in the task's `target_files` in [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json).
 * **Dependency Manifest Boundary (Exceptions):**
