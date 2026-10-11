@@ -26,3 +26,8 @@ Welcome to the project. This repository operates under an AI Agent Orchestrator 
    - Strictly respect `target_files` defined in the active task. Do not make unapproved changes across other files.
    - Run verification checks (formatting/linting, type checks, unit tests) before marking any task as `"completed"`.
    - Adhere to the error handling and rollback protocols if builds, checks, or migrations fail.
+
+5. **Execution Cadence & Git Workflow:**
+   - Work on strictly **ONE task at a time**.
+   - All task branches branch from and merge back into **`develop`** (`main` is reserved for releases).
+   - When a task is completed and merged into `develop`, **HALT** and wait for human instruction before proceeding. Never start the next task automatically.
