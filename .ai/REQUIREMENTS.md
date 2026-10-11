@@ -6,7 +6,7 @@ This document defines the business rules, functional scope, and architectural bo
 
 ## Modality Selection
 * **Active Project Type:** `Application` (Full-Stack SvelteKit + Bun + PostgreSQL + Drizzle + Auth.js)
-*(Refer to [`.ai/ARCHITECTURE.md`](file:///Users/alanvidal/Desktop/IA/.ai/ARCHITECTURE.md) for stack specifics)*
+*(Refer to [`.ai/ARCHITECTURE.md`](.ai/ARCHITECTURE.md) for stack specifics)*
 
 ---
 
@@ -25,7 +25,7 @@ This document defines the business rules, functional scope, and architectural bo
 - **Validation:** Every input form must implement dual-layer validation:
   - Client-side validation: Svelte 5 component state + Zod.
   - Server-side validation: SvelteKit server action / endpoint + Zod before Drizzle mutation.
-- **Code Quality:** All commits must pass the Verification Gate in [`.ai/TESTING.md`](file:///Users/alanvidal/Desktop/IA/.ai/TESTING.md).
+- **Code Quality:** All commits must pass the Verification Gate in [`.ai/TESTING.md`](.ai/TESTING.md).
 
 ---
 

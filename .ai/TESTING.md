@@ -6,7 +6,7 @@ This project mandates strict quality and verification gates prior to completing 
 
 ## 1. Pre-Commit Verification Gate
 
-Before an agent marks any task as `"completed"` in [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json), execute the checks corresponding to the active **Project Modality**:
+Before an agent marks any task as `"completed"` in [`.ai/TASK.json`](.ai/TASK.json), execute the checks corresponding to the active **Project Modality**:
 
 ### For Website Modality (Astro v7)
 ```bash
@@ -32,7 +32,7 @@ bun x svelte-check --tsconfig ./tsconfig.json
 bun test
 ```
 
-> **Enforcement Rule:** If any check fails, do NOT mark the task completed. Apply automated fixes (up to 2 attempts) or follow the Safe Rollback & Escalation Protocol in [`.ai/IA.md`](file:///Users/alanvidal/Desktop/IA/.ai/IA.md).
+> **Enforcement Rule:** If any check fails, do NOT mark the task completed. Apply automated fixes (up to 2 attempts) or follow the Safe Rollback & Escalation Protocol in [`.ai/IA.md`](.ai/IA.md).
 
 ---
 

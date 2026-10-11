@@ -27,15 +27,15 @@ Before starting development, verify the environment and version control setup:
      bunx skills add https://github.com/github/spec-kit || true
      ```
    - **Graceful Degradation:** If the network is restricted, repositories change, or the `skills` CLI fails/hangs, **do not crash or halt**. Fall back immediately to local documentation:
-     - Frontend / UI: [`.ai/DESIGN.md`](file:///Users/alanvidal/Desktop/IA/.ai/DESIGN.md) & [`.ai/CONVENTIONS.md`](file:///Users/alanvidal/Desktop/IA/.ai/CONVENTIONS.md)
-     - Architecture / Stack: [`.ai/ARCHITECTURE.md`](file:///Users/alanvidal/Desktop/IA/.ai/ARCHITECTURE.md)
-     - Testing: [`.ai/TESTING.md`](file:///Users/alanvidal/Desktop/IA/.ai/TESTING.md)
+     - Frontend / UI: [`.ai/DESIGN.md`](.ai/DESIGN.md) & [`.ai/CONVENTIONS.md`](.ai/CONVENTIONS.md)
+     - Architecture / Stack: [`.ai/ARCHITECTURE.md`](.ai/ARCHITECTURE.md)
+     - Testing: [`.ai/TESTING.md`](.ai/TESTING.md)
 
 ---
 
 ## 2. Project Types & Modalities
 
-Identify the project modality from [`.ai/STATE.md`](file:///Users/alanvidal/Desktop/IA/.ai/STATE.md) and [`.ai/ARCHITECTURE.md`](file:///Users/alanvidal/Desktop/IA/.ai/ARCHITECTURE.md) before writing code:
+Identify the project modality from [`.ai/STATE.md`](.ai/STATE.md) and [`.ai/ARCHITECTURE.md`](.ai/ARCHITECTURE.md) before writing code:
 
 1. **Website (Static / Landing):** Astro v7, TypeScript, TailwindCSS v4, Shadcn UI, and Svelte 5 (only for interactive islands if strictly required).
 2. **Application (Full-Stack Web App):** SvelteKit, Bun runtime, Svelte 5 (with Runes), PostgreSQL, Drizzle ORM, and Auth.js.
@@ -57,11 +57,11 @@ The agent processes strictly **ONE task at a time**. Multi-task execution or aut
 2. Human Review ("Do you approve this specification to register it and start development?")
       │
       ▼ (User Approves)
-3. Task Registration & Branch Creation
+3. Branch Switch, Task Registration & Branch Creation
+   - Switch to develop: `git checkout develop`
    - Append task to `.ai/TASK.json` with status: "pending"
    - Set active_task_id to this task
    - Atomic sync with `.ai/STATE.md`
-   - Switch to develop: `git checkout develop`
    - Create task branch: `git checkout -b task/<task_id>-<short-description>`
       │
       ▼
@@ -101,8 +101,8 @@ The agent processes strictly **ONE task at a time**. Multi-task execution or aut
 
 ## 4. State Synchronization Guardrail & Status Enum
 
-* **Single Source of Truth (SSOT):** [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json) holds the definitive list of tasks, status flags, and verification results.
-* **Agent Memory:** [`.ai/STATE.md`](file:///Users/alanvidal/Desktop/IA/.ai/STATE.md) holds human-readable progress, milestones, and blockers.
+* **Single Source of Truth (SSOT):** [`.ai/TASK.json`](.ai/TASK.json) holds the definitive list of tasks, status flags, and verification results.
+* **Agent Memory:** [`.ai/STATE.md`](.ai/STATE.md) holds human-readable progress, milestones, and blockers.
 * **Single Task Rule:** At any given time, only **one** task can have status `"in_progress"`.
 * **Atomic Sync Rule:** Never update a task status in `.ai/TASK.json` without updating the active status and milestones in `.ai/STATE.md` in the exact same step. When a task completes, `active_task_id` becomes `null` until the user assigns or approves the next task.
 
@@ -133,7 +133,7 @@ If compiler, type, test, or migration errors occur during execution:
      git clean -fd <target_directories>
      ```
    - **Step B (Record Failure Post-Rollback):**
-     Only *after* the code rollback is executed, update [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json) with status `"failed"`, record the stderr trace and attempts in `error_log`, and mirror in [`.ai/STATE.md`](file:///Users/alanvidal/Desktop/IA/.ai/STATE.md).
+     Only *after* the code rollback is executed, update [`.ai/TASK.json`](.ai/TASK.json) with status `"failed"`, record the stderr trace and attempts in `error_log`, and mirror in [`.ai/STATE.md`](.ai/STATE.md).
      *(This ensures the error log is never wiped out by the git restore command).*
 3. **Human Review Request:**
    - Present a concise failure summary to the user with the exact error and 2-3 proposed alternatives (e.g., adjust requirements, manual intervention, or alternative architecture).
@@ -146,7 +146,7 @@ If compiler, type, test, or migration errors occur during execution:
 
 Before performing actions, you MUST read the relevant files:
 
-* **Architecture, Stack & Backend:** Read [`.ai/ARCHITECTURE.md`](file:///Users/alanvidal/Desktop/IA/.ai/ARCHITECTURE.md) and [`.ai/REQUIREMENTS.md`](file:///Users/alanvidal/Desktop/IA/.ai/REQUIREMENTS.md).
-* **Frontend, UI, Theming & UX:** Read [`.ai/DESIGN.md`](file:///Users/alanvidal/Desktop/IA/.ai/DESIGN.md) and [`.ai/CONVENTIONS.md`](file:///Users/alanvidal/Desktop/IA/.ai/CONVENTIONS.md).
-* **Testing & Quality Assurance:** Read [`.ai/TESTING.md`](file:///Users/alanvidal/Desktop/IA/.ai/TESTING.md).
-* **Context, State & Tasks:** Read [`.ai/STATE.md`](file:///Users/alanvidal/Desktop/IA/.ai/STATE.md) and [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json).
+* **Architecture, Stack & Backend:** Read [`.ai/ARCHITECTURE.md`](.ai/ARCHITECTURE.md) and [`.ai/REQUIREMENTS.md`](.ai/REQUIREMENTS.md).
+* **Frontend, UI, Theming & UX:** Read [`.ai/DESIGN.md`](.ai/DESIGN.md) and [`.ai/CONVENTIONS.md`](.ai/CONVENTIONS.md).
+* **Testing & Quality Assurance:** Read [`.ai/TESTING.md`](.ai/TESTING.md).
+* **Context, State & Tasks:** Read [`.ai/STATE.md`](.ai/STATE.md) and [`.ai/TASK.json`](.ai/TASK.json).

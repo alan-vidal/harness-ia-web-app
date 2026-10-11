@@ -46,7 +46,7 @@ Maximum security is non-negotiable across client and server boundaries:
 1. **Zero Secret Leakage:**
    - Never commit `.env`, `.env.local`, or `.env.production` to git.
    - All environment variables must be declared with dummy defaults in `.env.example`.
-   - Never output API keys, database credentials, or secret tokens in console logs, commit messages, or [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json).
+   - Never output API keys, database credentials, or secret tokens in console logs, commit messages, or [`.ai/TASK.json`](.ai/TASK.json).
 2. **Runtime Environment Validation:**
    - Every environment variable must be validated at application startup using a Zod schema (e.g., `src/lib/env.ts`). If a required secret is missing or malformed, the process must throw immediately.
 3. **Client vs Server Isolation:**
@@ -79,7 +79,7 @@ Agents must work cleanly without leaving untracked pollution or making unauthori
   git merge --ff-only task/<task_id>-<short-description>
   git branch -d task/<task_id>-<short-description>
   ```
-* **Strict Scope Boundary:** Edits are restricted strictly to files listed in the task's `target_files` in [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json).
+* **Strict Scope Boundary:** Edits are restricted strictly to files listed in the task's `target_files` in [`.ai/TASK.json`](.ai/TASK.json).
 * **Dependency Manifest Boundary (Exceptions):**
   - If a task requires installing or removing libraries (`bun add` / `bun remove`), `package.json` must be declared in `target_files` during the specification phase.
   - Automatic updates to lockfiles (`bun.lockb` / `bun.lock`) resulting directly from approved dependency installation steps are authorized configuration changes.

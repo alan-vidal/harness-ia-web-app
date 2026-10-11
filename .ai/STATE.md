@@ -1,6 +1,6 @@
 # Project State (Agent Memory)
 
-> **Synchronization Guardrail:** This document must be kept strictly synchronized with [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json). Whenever a task status transitions in `TASK.json`, update the corresponding status, current task, and milestones here atomically.
+> **Synchronization Guardrail:** This document must be kept strictly synchronized with [`.ai/TASK.json`](.ai/TASK.json). Whenever a task status transitions in `TASK.json`, update the corresponding status, current task, and milestones here atomically.
 > **Single Task Rule:** Exactly one task can be active at a time. The agent must halt and await human confirmation before starting any subsequent task.
 
 ## Active Project Overview

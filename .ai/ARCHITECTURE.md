@@ -6,7 +6,7 @@ This project uses a **Modular Monolith** architecture. Business logic, server AP
 
 ## Modalities and Approved Stack
 
-The project operates under one of two mutually exclusive modalities, declared in [`.ai/STATE.md`](file:///Users/alanvidal/Desktop/IA/.ai/STATE.md) and [`.ai/TASK.json`](file:///Users/alanvidal/Desktop/IA/.ai/TASK.json). **[Bun](https://bun.sh/docs)** is the mandatory runtime and **[TypeScript](https://www.typescriptlang.org/docs/)** is the base language for both.
+The project operates under one of two mutually exclusive modalities, declared in [`.ai/STATE.md`](.ai/STATE.md) and [`.ai/TASK.json`](.ai/TASK.json). **[Bun](https://bun.sh/docs)** is the mandatory runtime and **[TypeScript](https://www.typescriptlang.org/docs/)** is the base language for both.
 
 ### 1. Website Modality (Landing Pages, Portfolios & Static Sites)
 * **Main Framework:** [Astro v7](https://docs.astro.build/)
