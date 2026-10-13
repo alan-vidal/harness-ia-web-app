@@ -26,6 +26,7 @@
 * **Modality Context:** `application`
 * **Target Files:** `src/lib/components/ui/Navbar.svelte`, `package.json`
 * **Verification Status:**
+  - Phase 2 Design & A11y Audit: ⏳ Pending
   - Biome Lint & Format: ⏳ Pending
   - Type Check (`svelte-check` / `astro check`): ⏳ Pending
   - Unit/Integration Tests: ⏳ Pending

@@ -25,6 +25,7 @@
       ],
       "expected_result": "A functional NavBar component that collapses into a hamburger menu on screens smaller than 768px, integrated into the layout without console or type errors.",
       "verification": {
+        "design_audit": "pending",
         "lint": "pending",
         "types": "pending",
         "tests": "pending"

@@ -19,17 +19,21 @@ Before starting development, verify the environment and version control setup:
      ```
    - **Branch Hierarchy:** `main` represents production/release code. Active development takes place on the **`develop`** branch. All task branches originate from `develop`.
 
-2. **Skill Requirements (Resilient Initialization):**
-   - Attempt to verify or add external skills if the CLI tool is available:
-     ```bash
-     bunx skills add https://github.com/anthropics/skills --skill frontend-design || true
-     bunx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines || true
-     bunx skills add https://github.com/github/spec-kit || true
-     ```
-   - **Graceful Degradation:** If the network is restricted, repositories change, or the `skills` CLI fails/hangs, **do not crash or halt**. Fall back immediately to local documentation:
+2. **Skill Requirements & Orchestration Protocol:**
+   - The harness orchestrates three specialized skills across the development lifecycle:
+     1. `spec-kit` (`https://github.com/github/spec-kit`): Powers Step 1 (Specification Phase) for robust Spec-Driven Development.
+     2. `high-end-visual-design` (`https://github.com/leonxlnx/taste-skill`): Powers Step 4 (Execution Phase 1: Generation) for premium art direction, typography, and micro-interactions.
+     3. `web-design-guidelines` (`https://github.com/vercel-labs/agent-skills`): Powers Step 5 (Quality Gate Phase 2: Audit) for accessibility and technical compliance.
+   - **Orchestration Rule:** Adhere strictly to the *Skill Integration Protocol* in [`.ai/DESIGN.md`](.ai/DESIGN.md). Generation and Audit skills must run sequentially, never concurrently, applying the Conflict Resolution rules when resolving audit findings.
+   - **Graceful Degradation:** Fall back immediately to local documentation if external skills are offline:
+     - Business / Brand / Copywriting: [`.ai/MANIFESTO.md`](.ai/MANIFESTO.md)
      - Frontend / UI: [`.ai/DESIGN.md`](.ai/DESIGN.md) & [`.ai/CONVENTIONS.md`](.ai/CONVENTIONS.md)
      - Architecture / Stack: [`.ai/ARCHITECTURE.md`](.ai/ARCHITECTURE.md)
      - Testing: [`.ai/TESTING.md`](.ai/TESTING.md)
+
+3. **Business Pre-Flight Guardrail (Template Completion):**
+   - Before specifying or developing user-facing UI, landing page components, or marketing copy, verify that [`.ai/MANIFESTO.md`](.ai/MANIFESTO.md) has been filled out by the project owner.
+   - If the manifesto contains unfilled placeholders, prompt the user to complete the core brand, services, or section definitions to guide development.
 
 ---
 
@@ -47,11 +51,13 @@ Identify the project modality from [`.ai/STATE.md`](.ai/STATE.md) and [`.ai/ARCH
 The agent processes strictly **ONE task at a time**. Multi-task execution or automatically advancing to the next task without user confirmation is **strictly prohibited**.
 
 ```
-[User Request] 
+[User Request]
       │
       ▼
 1. Specification Phase (Draft technical plan, target_files, steps, criteria)
+   - Formulate specifications using `spec-kit` patterns for rigorous scoping.
    - If installing packages, package.json must be listed in target_files.
+   - For UI, landing page, or copywriting tasks, align content with [`.ai/MANIFESTO.md`](.ai/MANIFESTO.md).
       │
       ▼
 2. Human Review ("Do you approve this specification to register it and start development?")
@@ -68,9 +74,11 @@ The agent processes strictly **ONE task at a time**. Multi-task execution or aut
 4. Execution & Strict Boundaries
    - Transition status to "in_progress" in `.ai/TASK.json` & `.ai/STATE.md`
    - Modify ONLY the files listed in `target_files` (and package manifests if installing dependencies)
+   - For UI tasks, run Phase 1: Generation using `high-end-visual-design` (never run auditor during initial generation).
       │
       ▼
 5. Quality & Verification Gate
+   - Phase 2: Design & A11y Audit (UI tasks): Run `web-design-guidelines` adhering to Conflict Resolution rules in [`.ai/DESIGN.md`](.ai/DESIGN.md).
    - Lint & Format: `bunx biome check --write <target_files>`
    - Type Checking: `bunx astro check` (Website) or `bun x svelte-check` (Application)
    - Automated Tests: `bun test`
@@ -79,6 +87,8 @@ The agent processes strictly **ONE task at a time**. Multi-task execution or aut
       │
       ▼ (All Passed)
 6. Task Completion, Commit, Merge & Housekeeping
+   - Set task status to "completed" and active_task_id to null in `.ai/TASK.json`
+   - Atomic sync with `.ai/STATE.md`
    - Stage target files AND harness state:
      `git add <target_files> .ai/TASK.json .ai/STATE.md`
    - Conventional Commit: `git commit -m "<type>(<scope>): <description>"`
@@ -86,8 +96,6 @@ The agent processes strictly **ONE task at a time**. Multi-task execution or aut
      `git checkout develop && git merge --ff-only task/<task_id>-<short-description>`
    - Delete merged local task branch:
      `git branch -d task/<task_id>-<short-description>`
-   - Set task status to "completed" and active_task_id to null in `.ai/TASK.json`
-   - Atomic sync with `.ai/STATE.md`
       │
       ▼
 7. Human-in-the-Loop Halt
@@ -101,21 +109,22 @@ The agent processes strictly **ONE task at a time**. Multi-task execution or aut
 
 ## 4. State Synchronization Guardrail & Status Enum
 
-* **Single Source of Truth (SSOT):** [`.ai/TASK.json`](.ai/TASK.json) holds the definitive list of tasks, status flags, and verification results.
-* **Agent Memory:** [`.ai/STATE.md`](.ai/STATE.md) holds human-readable progress, milestones, and blockers.
-* **Single Task Rule:** At any given time, only **one** task can have status `"in_progress"`.
-* **Atomic Sync Rule:** Never update a task status in `.ai/TASK.json` without updating the active status and milestones in `.ai/STATE.md` in the exact same step. When a task completes, `active_task_id` becomes `null` until the user assigns or approves the next task.
+- **Single Source of Truth (SSOT):** [`.ai/TASK.json`](.ai/TASK.json) holds the definitive list of tasks, status flags, and verification results.
+- **Agent Memory:** [`.ai/STATE.md`](.ai/STATE.md) holds human-readable progress, milestones, and blockers.
+- **Single Task Rule:** At any given time, only **one** task can have status `"in_progress"`.
+- **Atomic Sync Rule:** Never update a task status in `.ai/TASK.json` without updating the active status and milestones in `.ai/STATE.md` in the exact same step. When a task completes, `active_task_id` becomes `null` until the user assigns or approves the next task.
 
 ### Strict Status Enum Table
+
 All agents must use ONLY the following exact status values:
 
-| Status | Meaning | Allowed Next Statuses |
-| :--- | :--- | :--- |
-| `"pending"` | Specification approved, waiting to start branch and execution | `"in_progress"` |
-| `"in_progress"` | Actively being executed on its dedicated task branch | `"completed"`, `"failed"`, `"blocked"` |
-| `"completed"` | Verified passing, committed, and merged into `develop` | *Terminal state* (persisted in history) |
-| `"blocked"` | Paused due to missing external dependency, credentials, or blocker | `"in_progress"`, `"failed"` |
-| `"failed"` | Exceeded 2 repair attempts, rolled back, awaiting user instructions | `"pending"` (if restarted) |
+| Status          | Meaning                                                             | Allowed Next Statuses                   |
+| :-------------- | :------------------------------------------------------------------ | :-------------------------------------- |
+| `"pending"`     | Specification approved, waiting to start branch and execution       | `"in_progress"`                         |
+| `"in_progress"` | Actively being executed on its dedicated task branch                | `"completed"`, `"failed"`, `"blocked"`  |
+| `"completed"`   | Verified passing, committed, and merged into `develop`              | _Terminal state_ (persisted in history) |
+| `"blocked"`     | Paused due to missing external dependency, credentials, or blocker  | `"in_progress"`, `"failed"`             |
+| `"failed"`      | Exceeded 2 repair attempts, rolled back, awaiting user instructions | `"pending"` (if restarted)              |
 
 ---
 
@@ -133,8 +142,8 @@ If compiler, type, test, or migration errors occur during execution:
      git clean -fd <target_directories>
      ```
    - **Step B (Record Failure Post-Rollback):**
-     Only *after* the code rollback is executed, update [`.ai/TASK.json`](.ai/TASK.json) with status `"failed"`, record the stderr trace and attempts in `error_log`, and mirror in [`.ai/STATE.md`](.ai/STATE.md).
-     *(This ensures the error log is never wiped out by the git restore command).*
+     Only _after_ the code rollback is executed, update [`.ai/TASK.json`](.ai/TASK.json) with status `"failed"`, record the stderr trace and attempts in `error_log`, and mirror in [`.ai/STATE.md`](.ai/STATE.md).
+     _(This ensures the error log is never wiped out by the git restore command)._
 3. **Human Review Request:**
    - Present a concise failure summary to the user with the exact error and 2-3 proposed alternatives (e.g., adjust requirements, manual intervention, or alternative architecture).
 4. **Database Protection:**
@@ -146,7 +155,8 @@ If compiler, type, test, or migration errors occur during execution:
 
 Before performing actions, you MUST read the relevant files:
 
-* **Architecture, Stack & Backend:** Read [`.ai/ARCHITECTURE.md`](.ai/ARCHITECTURE.md) and [`.ai/REQUIREMENTS.md`](.ai/REQUIREMENTS.md).
-* **Frontend, UI, Theming & UX:** Read [`.ai/DESIGN.md`](.ai/DESIGN.md) and [`.ai/CONVENTIONS.md`](.ai/CONVENTIONS.md).
-* **Testing & Quality Assurance:** Read [`.ai/TESTING.md`](.ai/TESTING.md).
-* **Context, State & Tasks:** Read [`.ai/STATE.md`](.ai/STATE.md) and [`.ai/TASK.json`](.ai/TASK.json).
+- **Business Identity, Copywriting & Brand Voice:** Read [`.ai/MANIFESTO.md`](.ai/MANIFESTO.md) and [`.ai/REQUIREMENTS.md`](.ai/REQUIREMENTS.md).
+- **Architecture, Stack & Backend:** Read [`.ai/ARCHITECTURE.md`](.ai/ARCHITECTURE.md) and [`.ai/REQUIREMENTS.md`](.ai/REQUIREMENTS.md).
+- **Frontend, UI, Theming & UX:** Read [`.ai/DESIGN.md`](.ai/DESIGN.md) and [`.ai/CONVENTIONS.md`](.ai/CONVENTIONS.md).
+- **Testing & Quality Assurance:** Read [`.ai/TESTING.md`](.ai/TESTING.md).
+- **Context, State & Tasks:** Read [`.ai/STATE.md`](.ai/STATE.md) and [`.ai/TASK.json`](.ai/TASK.json).

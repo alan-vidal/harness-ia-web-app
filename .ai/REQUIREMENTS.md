@@ -2,6 +2,9 @@
 
 This document defines the business rules, functional scope, and architectural boundaries of what must be built.
 
+> **Business Context & Copywriting Alignment:**
+> All functional scope, value propositions, user-facing copy, and section structures must directly derive from and align with [`.ai/MANIFESTO.md`](.ai/MANIFESTO.md).
+
 ---
 
 ## Modality Selection

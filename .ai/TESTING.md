@@ -8,6 +8,12 @@ This project mandates strict quality and verification gates prior to completing 
 
 Before an agent marks any task as `"completed"` in [`.ai/TASK.json`](.ai/TASK.json), execute the checks corresponding to the active **Project Modality**:
 
+### Phase 2: Design & Accessibility Audit (UI Tasks Only)
+For any task creating or modifying UI components, layouts, or pages:
+1. Audit the generated output using `web-design-guidelines` (`https://github.com/vercel-labs/agent-skills`).
+2. Verify accessibility (a11y), semantic HTML tags, spacing, and `:focus-visible` keyboard states.
+3. Apply any audit fixes strictly following the **Conflict Resolution Rules** in [`.ai/DESIGN.md`](.ai/DESIGN.md) to preserve the Phase 1 premium aesthetic (opacity-adjusted contrast, no harsh solid 1px borders, smooth focus rings).
+
 ### For Website Modality (Astro v7)
 ```bash
 # 1. Scoped Format and Linting Check (Run on target files to avoid out-of-boundary modifications)
