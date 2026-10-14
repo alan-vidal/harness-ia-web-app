@@ -17,6 +17,7 @@ Welcome to the project. This repository operates under an AI Agent Orchestrator 
    - **Exception (Direct Fix):** Single-line fixes, typographical corrections, or unambiguous self-contained questions do NOT require a formal specification in `.ai/TASK.json` and may be executed directly.
 
 3. **Subsystem Routing (Read Before Action):**
+   - **Agents, Roles & Conflict Resolution:** [`.ai/AGENTS.md`](.ai/AGENTS.md)
    - **Business, Brand & Copywriting:** [`.ai/MANIFESTO.md`](.ai/MANIFESTO.md) and [`.ai/REQUIREMENTS.md`](.ai/REQUIREMENTS.md)
    - **Architecture & Backend:** [`.ai/ARCHITECTURE.md`](.ai/ARCHITECTURE.md) and [`.ai/REQUIREMENTS.md`](.ai/REQUIREMENTS.md)
    - **UI, Components & Design:** [`.ai/DESIGN.md`](.ai/DESIGN.md) and [`.ai/CONVENTIONS.md`](.ai/CONVENTIONS.md)

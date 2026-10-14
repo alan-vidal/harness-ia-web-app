@@ -26,6 +26,8 @@ Website (Astro) Directory Layout:
 │   ├── pages/              # File-based routing (index.astro, blog/[slug].astro)
 │   │   └── api/            # Server/static endpoints (.ts)
 │   └── styles/             # Global styles (Tailwind v4 app.css)
+├── tests/                  # Automated test suites
+│   └── unit/               # bun test suites (*.test.ts)
 ├── astro.config.mjs
 └── package.json
 ```
@@ -55,6 +57,9 @@ Application (SvelteKit) Directory Layout:
 │       ├── +layout.svelte
 │       ├── +page.svelte
 │       └── api/            # Internal REST/RPC endpoints
+├── tests/                  # Automated test suites
+│   ├── unit/               # bun test suites (*.test.ts)
+│   └── e2e/                # Playwright E2E spec suites (*.spec.ts)
 ├── svelte.config.js
 └── package.json
 ```

@@ -6,30 +6,31 @@
 ## Active Project Overview
 * **Project Modality:** `application`  *(Set to `website` for Astro v7, or `application` for SvelteKit)*
 * **Base Integration Branch:** `develop`
-* **Active Task ID:** `T-001`
-* **Status:** `pending` (Awaiting execution start)
-* **Task Branch:** `task/T-001-navigation-bar`
-* **Goal:** Implement responsive Navbar component using Shadcn UI, Tailwind v4, and Svelte 5 Runes.
+* **Active Task ID:** `null`
+* **Status:** `idle` (Ready for task specification)
+* **Task Branch:** `none`
+* **Goal:** Awaiting next approved task specification.
 
 ---
 
 ## Completed Milestones
-* [x] Environment initialization with Bun and `.ai/` harness structure.
-* [ ] Initial layout and navigation bar (`T-001`).
+* [x] AI harness structure and agent governance initialization (`.ai/`, `AGENTS.md`).
+* [ ] Project foundation scaffolding with SvelteKit & Bun.
+* [ ] Initial layout and navigation bar.
 * [ ] Database setup & ORM integration (if `application` modality).
 * [ ] Authentication integration with Auth.js (if `application` modality).
 
 ---
 
 ## Current Task Details
-* **Task ID:** `T-001`
+* **Task ID:** `null`
 * **Modality Context:** `application`
-* **Target Files:** `src/lib/components/ui/Navbar.svelte`, `package.json`
+* **Target Files:** `none`
 * **Verification Status:**
-  - Phase 2 Design & A11y Audit: ⏳ Pending
-  - Biome Lint & Format: ⏳ Pending
-  - Type Check (`svelte-check` / `astro check`): ⏳ Pending
-  - Unit/Integration Tests: ⏳ Pending
+  - Phase 2 Design & A11y Audit: ⚪ Idle
+  - Biome Lint & Format: ⚪ Idle
+  - Type Check (`svelte-check`): ⚪ Idle
+  - Unit/Integration Tests: ⚪ Idle
 
 ---
 
@@ -39,5 +40,5 @@
 ---
 
 ## Next Steps (Backlog)
-* [ ] Await user trigger to start execution of `T-001`.
-* [ ] Complete `T-001`, merge into `develop`, and await human instructions for next task.
+* [ ] Formulate technical specification for the next feature or foundation task.
+* [ ] Request human approval (Step 2) before registering task in `.ai/TASK.json` and branching.

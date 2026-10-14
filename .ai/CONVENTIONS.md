@@ -68,9 +68,10 @@ Agents must work cleanly without leaving untracked pollution or making unauthori
   git checkout -b task/<task_id>-<short-description>
   ```
   *(Example: `git checkout -b task/T-001-navigation-bar`)*
-* **Task Staging & Commit Protocol:** When verification passes, stage the target files and the harness state atomically before committing:
+* **Task Staging & Commit Protocol:** When verification passes, stage the target files, lockfiles, and the harness state atomically before committing:
   ```bash
   git add <target_files> .ai/TASK.json .ai/STATE.md
+  git add bun.lock bun.lockb 2>/dev/null || true
   git commit -m "<type>(<scope>): <description>"
   ```
 * **Task Merge & Branch Housekeeping:** Merge back into `develop` and delete the local task branch to keep the workspace clean:
@@ -80,15 +81,18 @@ Agents must work cleanly without leaving untracked pollution or making unauthori
   git branch -d task/<task_id>-<short-description>
   ```
 * **Strict Scope Boundary:** Edits are restricted strictly to files listed in the task's `target_files` in [`.ai/TASK.json`](.ai/TASK.json).
+  - *Direct Fix Exception:* Single-line fixes, typos, or documentation adjustments do not require `target_files` declaration and may be committed directly to `develop` after running scoped Biome/type checks.
 * **Dependency Manifest Boundary (Exceptions):**
   - If a task requires installing or removing libraries (`bun add` / `bun remove`), `package.json` must be declared in `target_files` during the specification phase.
-  - Automatic updates to lockfiles (`bun.lockb` / `bun.lock`) resulting directly from approved dependency installation steps are authorized configuration changes.
+  - Automatic updates to lockfiles (`bun.lockb` / `bun.lock`) resulting directly from approved dependency installation steps are authorized configuration changes and must be staged alongside `package.json`.
 * **Conventional Commits:** All git commits must adhere to the Conventional Commits specification:
   - `feat(<scope>): ...` - New features
   - `fix(<scope>): ...` - Bug fixes
   - `refactor(<scope>): ...` - Code structure improvements
   - `test(<scope>): ...` - Adding or updating tests
   - `docs(<scope>): ...` - Documentation changes
+  - `chore(<scope>): ...` - Maintenance, configuration, harness state, or task failure logging
+  - `ci(<scope>): ...` - Continuous integration / pipeline updates
 * **Clean Working Tree:** Before completing a task, verify `git status` shows no stray or unintended file modifications.
 
 ---

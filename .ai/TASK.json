@@ -1,37 +1,5 @@
 {
   "project_modality": "application",
-  "active_task_id": "T-001",
-  "tasks": [
-    {
-      "task_id": "T-001",
-      "modality": "application",
-      "status": "pending",
-      "branch": "task/T-001-navigation-bar",
-      "created_at": "2026-10-11T15:00:00Z",
-      "updated_at": "2026-10-11T15:00:00Z",
-      "structured_prompt": "Implement the main navigation component using Shadcn UI and TailwindCSS v4, ensuring mobile responsiveness and Svelte 5 Runes.",
-      "target_files": [
-        "src/lib/components/ui/Navbar.svelte",
-        "package.json"
-      ],
-      "steps": [
-        "1. Switch to develop and create feature branch 'task/T-001-navigation-bar'.",
-        "2. Install necessary Shadcn dependencies (if applicable) and record in package.json.",
-        "3. Create the Navbar.svelte component following PascalCase naming.",
-        "4. Implement Svelte 5 Runes ($state, $derived) for managing the mobile menu open/collapsed state.",
-        "5. Apply Tailwind v4 classes for light and dark mode.",
-        "6. Run verification suite (biome, svelte-check, bun test).",
-        "7. Merge branch back into develop upon verification passing and await user confirmation."
-      ],
-      "expected_result": "A functional NavBar component that collapses into a hamburger menu on screens smaller than 768px, integrated into the layout without console or type errors.",
-      "verification": {
-        "design_audit": "pending",
-        "lint": "pending",
-        "types": "pending",
-        "tests": "pending"
-      },
-      "execution_notes": "",
-      "error_log": null
-    }
-  ]
+  "active_task_id": null,
+  "tasks": []
 }
